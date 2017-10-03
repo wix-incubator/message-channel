@@ -1,1 +1,1 @@
-module.exports = require('/src/listener/listener');
+module.exports = require('./dist/src/listener/listener');
