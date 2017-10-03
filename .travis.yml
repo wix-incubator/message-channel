@@ -1,0 +1,25 @@
+sudo: required
+dist: trusty
+language: node_js
+branches:
+  only:
+  - master
+
+before_install:
+ - export CHROME_BIN=/usr/bin/google-chrome
+ - export DISPLAY=:99.0
+ - sh -e /etc/init.d/xvfb start
+ - sudo apt-get update || true
+ - sudo apt-get install -y libappindicator1 fonts-liberation
+ - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+ - sudo dpkg -i google-chrome*.deb
+ - npm install -g yarn@0.27.3
+
+install:
+ - yarn install
+ - yarn start bootstrap
+
+notifications:
+  email:
+    recipients:
+      - rany@wix.com
