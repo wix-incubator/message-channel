@@ -5,7 +5,7 @@
   "author": {
     "name": "Ran Yitzhaki",
     "email": "rany@wix.com",
-    "url": ""
+    "url": "https://github.com/wix/message-channel"
   },
   "main": "./dist/src/index.js",
   "files": [
