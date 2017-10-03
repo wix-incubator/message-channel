@@ -7,7 +7,7 @@
     "email": "rany@wix.com",
     "url": ""
   },
-  "main": "dist/src/index.js",
+  "main": "./dist/src/index.js",
   "files": [
     "dist"
   ],
