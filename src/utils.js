@@ -1,9 +1,6 @@
-import assert from 'assert';
 import {connectionRequestMsg, messageDelimiter} from './constants';
-import InvalidConnectionMessageException from './exceptions/InvalidConnectionMessageException';
 
 export const constructChannelMessage = (payload, id) => {
-  assert(payload && typeof payload === 'string');
   if (!id) {
     return payload;
   }
@@ -23,14 +20,13 @@ export const parseChannelMessage = message => {
 };
 
 export const constructConnectionMessage = scope => {
-  assert(scope && typeof scope === 'string');
   return connectionRequestMsg + messageDelimiter + scope;
 };
 
 export const parseConnectionMessage = message => {
   const firstDelimiterIndex = message.indexOf(messageDelimiter);
   if (firstDelimiterIndex === -1 || message.slice(0, firstDelimiterIndex) !== connectionRequestMsg) {
-    throw new InvalidConnectionMessageException();
+    throw new Error('Invalid connection message');
   }
 
   const scope = message.slice(firstDelimiterIndex + 1);
