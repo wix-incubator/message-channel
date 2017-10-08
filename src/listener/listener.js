@@ -1,4 +1,3 @@
-import assert from 'assert';
 import {connectionSuccessMsg} from '../constants';
 import {parseConnectionMessage} from '../utils';
 import listenFactory from './listen-factory';
@@ -24,7 +23,10 @@ function authorizeConnection(port) {
 const noop = () => {};
 
 function listener(scope, callback = noop) {
-  assert(scope && typeof scope === 'string', 'listener function expects to recieve a scope<string> as a first argument');
+  if (!scope || typeof scope !== 'string') {
+    throw new Error('listener function expects to recieve a scope<string> as a first argument');
+  }
+
   window.addEventListener('message', e => {
     if (isMessageRelevant(e.data, scope)) {
       const port = getMessagePort(e);
