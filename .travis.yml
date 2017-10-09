@@ -1,6 +1,9 @@
 sudo: required
+
 dist: trusty
+
 language: node_js
+
 branches:
   only:
   - master
@@ -13,11 +16,13 @@ before_install:
  - sudo apt-get install -y libappindicator1 fonts-liberation
  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
  - sudo dpkg -i google-chrome*.deb
- - npm install -g yarn@0.27.3
+ - npm install -g yarn@1.1.0
 
 install:
  - yarn install
- - yarn start bootstrap
+
+script:
+ - yarn test
 
 notifications:
   email:
