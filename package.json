@@ -9,7 +9,10 @@
   },
   "main": "./dist/src/index.js",
   "files": [
-    "dist"
+    "dist/",
+    "connect.js",
+    "listener.js",
+    "README.md"
   ],
   "scripts": {
     "start": "yoshi start",
