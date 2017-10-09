@@ -3,6 +3,7 @@
 
 The best communication method between an iframe and the main frame is through [Channel messaging API](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API).
 
+[![Build Status](https://travis-ci.org/wix/message-channel.svg?branch=master)](https://travis-ci.org/wix/message-channel)
 ## TLDR
 Use this library for fast and performant communication between frames which uses message channel api underneath the hood.
 __________________________________________________
