@@ -38,4 +38,4 @@ function listener(scope, callback = noop) {
   });
 }
 
-export default listener;
+module.exports = listener;

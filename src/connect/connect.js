@@ -30,4 +30,4 @@ function connect(scope, options = {}) {
 }
 
 
-export default connect;
+module.exports = connect;
