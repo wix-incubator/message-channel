@@ -53,8 +53,5 @@
     "globals": {
       "window": true
     }
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
   }
 }
