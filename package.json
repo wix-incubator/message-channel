@@ -48,6 +48,9 @@
       "es2015"
     ]
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "eslintConfig": {
     "extends": "wix/esnext",
     "globals": {
