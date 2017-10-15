@@ -8,7 +8,15 @@ export default function sendFactory(port, options) {
   port.onmessage = e => {
     const {id, payload} = parseChannelMessage(e.data);
     if (messages[id]) {
-      messages[id](payload);
+      const modifiedEvent = {
+        data: payload,
+        origin: e.origin,
+        lastEventId: e.lastEventId,
+        source: e.source,
+        ports: e.ports,
+      };
+
+      messages[id](modifiedEvent);
     }
   };
 

@@ -27,8 +27,8 @@ import listenerMessageChannel from 'message-channel/listener';
 // the listener will call the onMessage callback everytime a connection is being established.
 
 listenerMessageChannel('scope-name', onMessage => {
-  onMessage((message, reply) =>
-    reply(message + ' world')
+  onMessage((e, reply) =>
+    reply(e.data + ' world')
   );
 });
 ```
@@ -41,7 +41,7 @@ import connectMessageChannel from 'message-channel/connect';
 const send = await connectMessageChannel('scope-name');
 
 send('hello')
-  .then(reply => console.log(reply)); // 'hello world'
+  .then(e => console.log(e.data)); // 'hello world'
 ```
 
 ## Installation
@@ -86,7 +86,9 @@ yarn add message-channel
 ### listenerMessageChannel(scope: `string`, onMessage: `function`): `void`
 
 ```js
-onMessage((message: `string`, reply: `function`) => {
-  reply('response'); // will return a reply with the argument value (value must be serializable)
+onMessage((e: `object`, reply: `function`) => {
+  reply(e.data); // will return a reply with the argument value (value must be serializable)
 });
 ```
+
+__important note!:__ The event you'll get on the `onMessage` callback is a mirror of the [messageEvent](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent) type. The reason for not sending the "real" event, is that we add an id to every message and we want to strip the id from the data.

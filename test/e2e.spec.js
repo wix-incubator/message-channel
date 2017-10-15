@@ -74,8 +74,8 @@ describe('e2e', () => {
     it('should send a post message through the port channel and get a promise with the response', async () => {
 
       await page.evaluate(`window.listenerMessageChannel('test-scope', listen => {
-        listen((message, replay) => {
-          replay(message + 'CESS');
+        listen((e, replay) => {
+          replay(e.data + 'CESS');
         });
       });`);
 
@@ -84,8 +84,8 @@ describe('e2e', () => {
       await frame.evaluate(`window.connectMessageChannel('test-scope')
         .then(send => {
           send('SUC')
-            .then(reply => {
-              const text = window.document.createTextNode(reply);
+            .then(e => {
+              const text = window.document.createTextNode(e.data);
               window.document.querySelector('#result').appendChild(text);
             })
             .catch(() => {
@@ -101,7 +101,7 @@ describe('e2e', () => {
 
     it('should send a post message through the port channel and get a rejected promise when there is no response', async () => {
       await page.evaluate(`window.listenerMessageChannel('test-scope', listen => {
-              listen((message, replay) => {
+              listen((e, replay) => {
                 // no response
               });
             });`);

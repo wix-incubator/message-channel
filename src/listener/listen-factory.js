@@ -11,7 +11,15 @@ export default function listenFactory(port) {
         port.postMessage(constructChannelMessage(replyMessage, id));
       };
 
-      return handler(payload, reply);
+      const modifiedEvent = {
+        data: payload,
+        origin: e.origin,
+        lastEventId: e.lastEventId,
+        source: e.source,
+        ports: e.ports,
+      };
+
+      return handler(modifiedEvent, reply);
     };
   };
 }
