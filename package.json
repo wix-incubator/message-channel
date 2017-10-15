@@ -21,7 +21,7 @@
     "pretest": "yoshi build",
     "test": "yoshi test",
     "posttest": "yoshi lint",
-    "release": "yoshi release"
+    "release": ":"
   },
   "dependencies": {
     "uuid": "^3.1.0"
