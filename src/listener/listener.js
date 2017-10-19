@@ -32,7 +32,7 @@ function listener(scope, callback = noop) {
       const port = getMessagePort(e);
       if (port) {
         authorizeConnection(port);
-        callback(listenFactory(port));
+        listenFactory(port, callback);
       }
     }
   };

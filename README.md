@@ -26,11 +26,9 @@ import listenerMessageChannel from 'message-channel/listener';
 
 // the listener will call the onMessage callback everytime a connection is being established.
 
-listenerMessageChannel('scope-name', onMessage => {
-  onMessage((e, reply) =>
-    reply(e.data + ' world')
-  );
-});
+const handleMessage = (e, reply) => reply(e.data + ' world');
+
+listenerMessageChannel('scope-name', handleMessage);
 ```
 
 ```js
@@ -83,10 +81,10 @@ yarn add message-channel
 * connectionMaxTimeout: `number` (ms) = 200
 * messageMaxTimeout: `number` (ms) = 6000
 
-### listenerMessageChannel(scope: `string`, onMessage: `function`): `void`
+### listenerMessageChannel(scope: `string`, messageHandler: `function`): `void`
 
 ```js
-onMessage((e: `object`, reply: `function`) => {
+messageHandler((e: `object`, reply: `function`) => {
   reply(e.data); // will return a reply with the argument value (value must be serializable)
 });
 ```
@@ -97,11 +95,7 @@ __important note!:__ The event you'll get on the `onMessage` callback is a mirro
 If you want to stop the listener, just call the stop function which returns from the call to the listener.
 
 ```js
-const stop = listenerMessageChannel('scope-name', onMessage => {
-  onMessage((e, reply) =>
-    reply(e.data + ' world')
-  );
-});
+const stop = listenerMessageChannel('scope-name', (e, reply) => reply(e.data + ' world'));
 
 stop(); // The listener won't work.
 ```

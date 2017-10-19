@@ -84,10 +84,8 @@ describe('frame listener-strategy e2e', () => {
   describe('after a successfull connection', () => {
     it('should send a post message through the port channel and get a promise with the response', async () => {
 
-      await page.evaluate(`window.listenerMessageChannel('test-scope', listen => {
-        listen((e, replay) => {
-          replay(e.data + 'CESS');
-        });
+      await page.evaluate(`window.listenerMessageChannel('test-scope', (e, replay) => {
+        replay(e.data + 'CESS');
       });`);
 
       const frame = getFrame(page);
