@@ -31,7 +31,7 @@ function cleanResultDiv(page) {
   });
 }
 
-describe('e2e', () => {
+describe('frame listener-strategy e2e', () => {
   let browser;
   let page;
 
@@ -62,6 +62,17 @@ describe('e2e', () => {
 
     it('should fail to connect when there is a listener on a different scope', async () => {
       await page.evaluate(`window.listenerMessageChannel('different-scope');`);
+      const frame = getFrame(page);
+      await performConnectionToListener(frame);
+      await wait(deafultConnectionMaxTimeout);
+      const resultElement = await getResultInnerHtml(frame);
+      expect(resultElement).to.be.equal('FAILURE');
+    });
+
+    it('should stop the listener when calling the stop function', async () => {
+      await page.evaluate(`const close = window.listenerMessageChannel('test-scope');
+      close();
+      `);
       const frame = getFrame(page);
       await performConnectionToListener(frame);
       await wait(deafultConnectionMaxTimeout);

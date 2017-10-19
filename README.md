@@ -92,3 +92,16 @@ onMessage((e: `object`, reply: `function`) => {
 ```
 
 __important note!:__ The event you'll get on the `onMessage` callback is a mirror of the [messageEvent](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent) type. The reason for not sending the "real" event, is that we add an id to every message and we want to strip the id from the data.
+
+### stop the listener
+If you want to stop the listener, just call the stop function which returns from the call to the listener.
+
+```js
+const stop = listenerMessageChannel('scope-name', onMessage => {
+  onMessage((e, reply) =>
+    reply(e.data + ' world')
+  );
+});
+
+stop(); // The listener won't work.
+```

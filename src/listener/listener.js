@@ -27,7 +27,7 @@ function listener(scope, callback = noop) {
     throw new Error('listener function expects to recieve a scope<string> as a first argument');
   }
 
-  window.addEventListener('message', e => {
+  const _listener = e => {
     if (isMessageRelevant(e.data, scope)) {
       const port = getMessagePort(e);
       if (port) {
@@ -35,7 +35,10 @@ function listener(scope, callback = noop) {
         callback(listenFactory(port));
       }
     }
-  });
+  };
+
+  window.addEventListener('message', _listener);
+  return () => window.removeEventListener('message', _listener);
 }
 
 module.exports = listener;
